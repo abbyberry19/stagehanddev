@@ -1,0 +1,10 @@
+<template>
+    <v-btn
+      variant="outlined"
+      color="primary"
+      rounded="lg"
+      class="px-8"
+    >
+      Login
+    </v-btn>
+</template>
