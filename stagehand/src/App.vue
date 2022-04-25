@@ -1,5 +1,5 @@
 <template>
-<v-app class="bg-gray-100">
+<v-app class="bg-gray-100 bg-cover min-h-screen">
   <AppHeader />
     <v-main>
 
