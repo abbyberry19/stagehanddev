@@ -1,6 +1,9 @@
 import Api from '../services/api.js'
 
 export default {
+
+  // Statuses
+
   getPosts () {
     return Api().get('posts')
   },
@@ -15,5 +18,15 @@ export default {
 
   deletePost (id) {
     return Api().delete('posts/' + id)
+  },
+
+  // Files
+
+  getFiles () {
+    return Api().get('files')
+  },
+
+  addFile (params) {
+    return Api().post('files', params)
   }
 }

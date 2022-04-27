@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-  
-var imageSchema = new mongoose.Schema({
+ 
+var uploadSchema = new mongoose.Schema({
     name: String,
     desc: String,
     img:
@@ -9,8 +9,7 @@ var imageSchema = new mongoose.Schema({
         contentType: String
     }
 });
-  
+ 
 //Image is a model which has a schema imageSchema
-  
-var Image = mongoose.model('Image', imageSchema);
-module.exports = Image;
+ 
+module.exports = new mongoose.model('Upload', uploadSchema);

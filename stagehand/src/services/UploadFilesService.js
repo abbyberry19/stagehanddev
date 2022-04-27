@@ -1,14 +1,13 @@
 import Api from '../services/api.js'
 
 class UploadFilesService {
-  upload(file, onUploadProgress) {
+  addFile(file) {
     let formData = new FormData();
     formData.append("file", file);
-    return Api.post("/upload", formData, {
+    return Api.post("/files", formData, {
       headers: {
         "Content-Type": "multipart/form-data"
-      },
-      onUploadProgress
+      }
     });
   }
   getFiles() {
