@@ -1,7 +1,6 @@
 <template>
-    <!-- <v-theme-provider theme="dark" with-background> -->
-        <NavDrawer />
-    <!-- </v-theme-provider> -->
+<v-container>
+    <NavDrawer />
     <v-card
       class="rounded-xl"
       color="white"
@@ -15,50 +14,62 @@
         class="mb-2 ml-2 ico-category"
         icon="mdi-file-document-outline"
       >
-        <!-- <v-icon 
-          class="px-0"
-          icon="mdi-file-document-outline"
-        ></v-icon> -->
       </v-btn>
       <v-btn 
         variant="plain" 
         class="mb-2 ico-category"
         icon="mdi-image-outline"
       >
-        <!-- <v-icon
-          icon="mdi-image-outline"
-        ></v-icon> -->
       </v-btn>
       <v-btn 
         variant="plain" 
         class="mb-2 ico-category"
         icon="mdi-video-outline"
       >
-        <!-- <v-icon
-          icon="mdi-video-outline"
-        ></v-icon> -->
       </v-btn>
       <v-btn 
         variant="plain" 
         class="mb-2 ico-category"
         icon="mdi-music-box-outline"
       >
-        <!-- <v-icon
-          icon="mdi-music-box-outline"
-        ></v-icon> -->
       </v-btn>
-    </v-card>      
+      <v-card 
+              flat
+              color="#f9fafb"
+              class="mt-4 mx-2 pa-2 rounded-lg" 
+              v-for="upload in uploads" :key="upload._id"
+            >
+              <h1 class="title text-h7">{{ upload.img }}</h1>
+          </v-card>
+    </v-card>
+    </v-container>      
 </template>
 
 <script>
 
 import NavDrawer from './ui/NavDrawer.vue'
+import PostsService from '../services/PostsService.js'
 
 export default {
   name: 'FilesView',
   components: {
     NavDrawer
-  }
+  },
+  data () {
+    return {
+      uploads: [],
+    }
+  },
+  mounted () {
+    this.getUploads()
+  },
+  methods: {
+    async getUploads () {
+      const response = await PostsService.getUploads()
+      this.uploads = response.data["uploads"]
+      console.log(this.uploads);
+    },
+  },
 }
 
 </script>

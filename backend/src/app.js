@@ -235,6 +235,7 @@ app.post('/posts', (req, res) => {
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, '/uploads/'));
+    // cb(null, 'uploads')
     // cb(null, __dirname);
   },
   filename: function (req, file, cb) {
@@ -255,39 +256,58 @@ app.get("/uploads",(req,res)=>{
   }).sort({_id:-1})
 })
 
-app.post("/uploads",upload.single('myFile'),(req,res)=>{
-//   var obj = {
-//     name: req.body.name,
-//     desc: req.body.desc,
-//     img: {
-//         data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-//         contentType: 'image/png'
-//     }
-// }
-// Upload.create(obj, (err, item) => {
-//     if (err) {
-//         console.log(err);
-//     }
-//     else {
-//         // item.save();
-//         res.redirect('/');
-//     }
-//   });
-  var img = fs.readFileSync(req.file.path);
-  var encode_img = img.toString('base64');
-  var final_img = {
-      contentType:req.file.mimetype,
-      // image:new Buffer(encode_img,'base64')
-      image: Buffer.from(encode_img, 'base64')
-  };
-  Upload.create(final_img,function(err,result){
-      if(err){
-          console.log(err);
-      }else{
-          console.log(result.img.Buffer);
-          console.log("Saved To database");
-          res.contentType(final_img.contentType);
-          res.send(final_img.image);
-      }
-  })
+app.post("/uploads",upload.single('img'),(req,res)=>{
+  var obj = {
+    // name: req.body.name,
+    // desc: req.body.desc,
+    img: {
+        data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+        contentType: 'image/png'
+    }
+}
+Upload.create(obj, (err, upload) => {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        // upload.save();
+        res.redirect('/uploads');
+    }
+  });
+  // var img = fs.readFileSync(req.file.path);
+  // var encode_img = img.toString('base64');
+  // var final_img = {
+  //     contentType:req.file.mimetype,
+  //     // image:new Buffer(encode_img,'base64')
+  //     image: Buffer.from(encode_img, 'base64')
+  // };
+  // Upload.create(final_img,function(err,result){
+  //     if(err){
+  //         console.log(err);
+  //     }else{
+  //         console.log(result.img.Buffer);
+  //         console.log("Saved To database");
+  //         res.contentType(final_img.contentType);
+  //         res.send(final_img.image);
+  //     }
+  // })
 });
+
+// const { auth } = require('express-openid-connect');
+
+// const config = {
+//   authRequired: false,
+//   auth0Logout: true,
+//   secret: 'a long, randomly-generated string stored in env',
+//   baseURL: 'http://localhost:3000',
+//   clientID: '3ri89GNH8i3fm06CCD3kSVP2bUfgAsNi',
+//   issuerBaseURL: 'https://dev-x11k9esb.eu.auth0.com'
+// };
+
+// // auth router attaches /login, /logout, and /callback routes to the baseURL
+// app.use(auth(config));
+
+// // req.isAuthenticated is provided from the auth router
+// app.get('/', (req, res) => {
+//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+// });

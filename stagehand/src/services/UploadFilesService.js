@@ -1,17 +1,17 @@
 import Api from '../services/api.js'
 
 class UploadFilesService {
-  addFile(file) {
+  addUpload(file) {
     let formData = new FormData();
-    formData.append("file", file);
-    return Api.post("/files", formData, {
+    formData.append("uploads", file);
+    return Api.post("/uploads", formData, {
       headers: {
         "Content-Type": "multipart/form-data"
       }
     });
   }
-  getFiles() {
-    return Api.get("/files");
+  getUploads() {
+    return Api.get("/uploads");
   }
 }
 export default new UploadFilesService();

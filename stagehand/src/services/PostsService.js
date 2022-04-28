@@ -22,11 +22,11 @@ export default {
 
   // Files
 
-  getFiles () {
-    return Api().get('files')
+  getUploads () {
+    return Api().get('uploads')
   },
 
-  addFile (params) {
-    return Api().post('files', params)
+  addUpload (params) {
+    return Api().post('uploads', params)
   }
 }

@@ -1,9 +1,7 @@
 var mongoose = require('mongoose');
  
 var uploadSchema = new mongoose.Schema({
-    name: String,
-    desc: String,
-    img:
+    myFile:
     {
         data: Buffer,
         contentType: String

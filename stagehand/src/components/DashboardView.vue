@@ -11,11 +11,10 @@
           <v-card 
               flat
               color="#f9fafb"
-              class="mt-4 mx-2 pa-2 rounded-lg" 
-              v-for="file in files" :key="file._id"
+              class="mt-4 mx-2 pa-2 rounded-lg overflow-hidden" 
+              v-for="upload in uploads" :key="upload._id"
             >
-              <h1 class="title text-h7">{{ file.filename }}</h1>
-              <text-body-1>{{ file.caption }}</text-body-1>
+              <h1 class="text-lg overflow-hidden">{{ upload.img }}</h1>
           </v-card>
         </v-card>
       </v-col>
@@ -75,21 +74,23 @@ export default {
       message: "",
       fileInfos: [],
       posts: [],
-      files: [],
+      uploads: [],
     }
   },
   mounted () {
     this.getPosts()
-    this.getFiles()
+    this.getUploads()
   },
   methods: {
     async getPosts () {
       const response = await PostsService.getPosts()
       this.posts = response.data["posts"]
+      console.log(this.posts);
     },
-    async getFiles () {
-      const response = await PostsService.getFiles()
-      this.files = response.data["posts"]
+    async getUploads () {
+      const response = await PostsService.getUploads()
+      this.uploads = response.data["uploads"]
+      console.log(this.uploads);
     },
     async deletePost (id) {
       await PostsService.deletePost(id)
