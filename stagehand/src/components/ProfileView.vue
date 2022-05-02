@@ -1,16 +1,27 @@
 <template>
-    <NavDrawer />
+  <div>
+    <h2>User Profile</h2>
+    <button @click="login">Log in</button>
+    <pre v-if="isAuthenticated">
+        <code>{{ user }}</code>
+        <span>{{ user.name }}</span>
+      </pre>
+  </div>
 </template>
-
 <script>
+  import { useAuth0 } from '@auth0/auth0-vue';
 
-import NavDrawer from './ui/NavDrawer.vue'
+  export default {
+    setup() {
+      const { loginWithRedirect, user, isAuthenticated } = useAuth0();
 
-export default {
-  name: 'ProfileView',
-  components: {
-    NavDrawer
-  }
-}
-
+      return {
+        login: () => {
+          loginWithRedirect();
+        },
+        user,
+        isAuthenticated
+      };
+    }
+  };
 </script>

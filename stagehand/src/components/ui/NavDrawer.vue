@@ -7,11 +7,9 @@
         flat
       >
         <v-list>
-          <v-list-item
-            prepend-avatar="https://ui-avatars.com/api/?name=Example+Account"
-            title="Name"
-            subtitle="Account Email"
-          ></v-list-item>
+            <v-list-avatar>"https://ui-avatars.com/api/?name=Example+Account"</v-list-avatar>
+            <v-list-item-title>{{ user.nickname }}</v-list-item-title>
+            <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
         </v-list>
 
         <v-divider color="white"></v-divider>
@@ -26,7 +24,19 @@
 </template>
 
 <script>
+  import { useAuth0 } from '@auth0/auth0-vue';
+
   export default {
-    //
-  }
+    setup() {
+      const { loginWithRedirect, user, isAuthenticated } = useAuth0();
+
+      return {
+        login: () => {
+          loginWithRedirect();
+        },
+        user,
+        isAuthenticated
+      };
+    }
+  };
 </script>
