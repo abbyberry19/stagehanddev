@@ -27,7 +27,7 @@
         <span class="pt-6 subtitle-2 primary--text" style="cursor:pointer">Forgotten password?</span>
     </v-card>
       <div class="text-center">
-         <p class="pt-4">Don't have an account? <span class="red--text" style="cursor:pointer">Register here.</span></p>
+         <p class="pt-4">Don't have an account? <v-btn plain href="/signup">Register here.</v-btn></p>
      </div>
      </v-container>
 </template>

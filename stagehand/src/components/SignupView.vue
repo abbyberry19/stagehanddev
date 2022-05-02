@@ -72,7 +72,7 @@
 import SignupButton from './ui/SignupButton.vue'
 
 export default {
-  name: 'LoginView',
+  name: 'SignupView',
   components: {
     SignupButton
   }
